@@ -12,6 +12,6 @@ server.use(express.json())
 // ACTIONS CRONTROLLER
 server.use('/api/actions', actionsRouter)
 // PROJECT CRONTROLLER
-server.use('/api/project', projectRouter)
+server.use('/api/projects', projectRouter)
 
 module.exports = server

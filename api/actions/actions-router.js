@@ -1,3 +1,7 @@
+/**
+ *  ACTIONS CONTROLLER
+ */
+
 const server = require('express')
 const router = server.Router()
 
