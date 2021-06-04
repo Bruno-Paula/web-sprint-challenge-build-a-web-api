@@ -74,14 +74,14 @@ router.put('/:id', validateId, validateEntries, async (req, res, next) => {
  *  @Params: project ID
  */
 
-// router.delete('/:id', projectId, async (req, res, next) => {
-//   try {
-//     const deletedPrject = await Project.remove(req.params.id)
-//     res.status(200).json({message: `Items was deleted successfully.`})
-//   } catch (error) {
-//     next(error)
-//   }
-// })
+router.delete('/:id', validateId, async (req, res, next) => {
+  try {
+    await Action.remove(req.params.id)
+    res.status(200).json({message: `Action was deleted successfully.`})
+  } catch (error) {
+    next(error)
+  }
+})
 
 /**
  *  Display: Returns an array of action that belonging to a project with the given id

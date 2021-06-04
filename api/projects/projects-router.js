@@ -53,7 +53,7 @@ router.post('/', validateEntries, async (req, res) => {
 /**
  *  Display: Returns the updated project.
  *  METHOD: PUT
- *  URL: /api/projects
+ *  URL: /api/projects/:id
  *  @Params: project ID
  */
 
@@ -90,8 +90,13 @@ router.delete('/:id', projectId, async (req, res, next) => {
  *  @Params: project ID
  */
 
-router.get('/:id/actions', (req, res) => {
-  res.status(200).json('actions')
+router.get('/:id/actions', projectId, async (req, res, next) => {
+  try {
+    const data = await Project.getProjectActions(req.params.id)
+    res.status(200).json(data)
+  } catch (error) {
+    next(error)
+  }
 })
 
 router.use((err, req, res, next) => {

@@ -19,7 +19,6 @@ class Validade {
 
   validateEntries = (req, res, next) => {
     const {name, description, completed} = req.body
-    console.log(typeof completed)
 
     if (!name || !description || typeof completed !== 'boolean') {
       next({status: 400, message: 'Missing fields or Invalid Fields'})
