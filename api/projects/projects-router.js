@@ -46,7 +46,7 @@ router.post('/', validateEntries, async (req, res) => {
     const dataResponse = await Project.insert(data)
     res.status(201).json(dataResponse)
   } catch (error) {
-    res.json(error)
+    next(error)
   }
 })
 
@@ -57,8 +57,14 @@ router.post('/', validateEntries, async (req, res) => {
  *  @Params: project ID
  */
 
-router.put('/:id', projectId, (req, res) => {
-  res.status(200).json(123)
+router.put('/:id', projectId, validateEntries, async (req, res, next) => {
+  try {
+    const updatedData = await req.data
+    const data = await Project.update(req.params.id, updatedData)
+    res.status(200).json(data)
+  } catch (error) {
+    next(error)
+  }
 })
 
 /**
@@ -68,8 +74,8 @@ router.put('/:id', projectId, (req, res) => {
  *  @Params: project ID
  */
 
-router.put('/:id', (req, res) => {
-  res.status(200).json(123)
+router.delete('/:id', projectId, (req, res) => {
+  res.status(200).json(1234)
 })
 
 /**
