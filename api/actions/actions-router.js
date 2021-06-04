@@ -7,7 +7,7 @@ const router = server.Router()
 const Action = require('./actions-model')
 const {validateId, validateEntries} = require('./actions.middleware')
 /**
- *  Display:  an arry with all actions.
+ *  Display:  an array with all actions.
  *  METHOD: GET
  *  URL: /api/actions
  *  @Params:
@@ -82,22 +82,6 @@ router.delete('/:id', validateId, async (req, res, next) => {
     next(error)
   }
 })
-
-/**
- *  Display: Returns an array of action that belonging to a project with the given id
- *  METHOD: GET
- *  URL: /api/Actions/:id/actions
- *  @Params: project ID
- */
-
-// router.get('/:id/actions', projectId, async (req, res, next) => {
-//   try {
-//     const data = await Project.getProjectActions(req.params.id)
-//     res.status(200).json(data)
-//   } catch (error) {
-//     next(error)
-//   }
-// })
 
 router.use((err, req, res, next) => {
   res.status(err.status || 500).json({
