@@ -74,8 +74,13 @@ router.put('/:id', projectId, validateEntries, async (req, res, next) => {
  *  @Params: project ID
  */
 
-router.delete('/:id', projectId, (req, res) => {
-  res.status(200).json(1234)
+router.delete('/:id', projectId, async (req, res, next) => {
+  try {
+    const deletedPrject = await Project.remove(req.params.id)
+    res.status(200).json({message: `Items was deleted successfully.`})
+  } catch (error) {
+    next(error)
+  }
 })
 
 /**
@@ -85,8 +90,8 @@ router.delete('/:id', projectId, (req, res) => {
  *  @Params: project ID
  */
 
-router.get('/api/projects/:id/actions', (req, res) => {
-  res.status(200).json(123)
+router.get('/:id/actions', (req, res) => {
+  res.status(200).json('actions')
 })
 
 router.use((err, req, res, next) => {
